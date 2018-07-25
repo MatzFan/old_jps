@@ -14,9 +14,10 @@ require_relative 'test_helper'
 #     assert page.has_content?('Hello World!')
 #   end
 # end
-include Capybara::DSL
 
 describe App do
+  include Capybara::DSL
+
   it 'contains "Hello World!" at /' do
     visit '/'
     expect page.has_content? 'Hello World!'

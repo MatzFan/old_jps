@@ -5,8 +5,10 @@ Bundler.require
 
 require 'sinatra/base'
 
-# the web app
+# the app
 class App < Sinatra::Application
+  set :server, :puma
+
   get '/' do
     'Hello World!'
   end
