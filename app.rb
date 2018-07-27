@@ -2,17 +2,20 @@
 
 require 'bundler'
 Bundler.require
+$LOAD_PATH << File.expand_path(__dir__)
 
 require 'haml'
 require 'sinatra/base'
 
-# $LOAD_PATH << File.expand_path(__dir__)
+# relies on base.rb dependency being first alphabetically
+Dir[File.join(__dir__, 'app', 'routes', '*.rb')].sort.each { |f| require f }
 
 # the app
-class App < Sinatra::Application
-  set :server, :puma
 
-  get '/' do
-    haml :layout
+module Jps
+  # the app
+  class App < Sinatra::Application
+    use Jps::Routes::Base
+    use Jps::Routes::Page
   end
 end

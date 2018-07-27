@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 ENV['RACK_ENV'] = 'test'
 
-require_relative '../app'
+require_relative '../../../app'
 
 require 'rack/test'
 require 'minitest/autorun'
@@ -9,4 +11,4 @@ require 'capybara'
 require 'capybara/minitest'
 require 'capybara/dsl'
 
-Capybara.app = App
+Capybara.app = Jps::App
