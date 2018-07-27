@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require 'bundler'
-require 'bootstrap'
+Bundler.require
+
 require 'haml'
 require 'sinatra/base'
 
-Bundler.require
 # $LOAD_PATH << File.expand_path(__dir__)
 
 # the app
