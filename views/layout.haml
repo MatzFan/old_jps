@@ -1,0 +1,16 @@
+!!!
+%html{:lang => "en-GB"}
+  %head
+    %title jerseypropertyservices.com
+    %meta{ content: "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+    %link(rel="stylesheet" href="/bootstrap.min.css")
+    %link(rel="stylesheet" href="/site.css")
+    %script{src: '/jquery-3.3.1.min.js'}
+    %script{src: '/popper-1.14.3.min.js'}
+    %script{src: '/bootstrap.min.js'}
+  %body
+    = haml :_navigation
+    .container-fluid.site
+      / = yield
+  %ul.navbar.fixed-bottom
+    %p.copyright &copy; 2018 jerseypropertyservices.com

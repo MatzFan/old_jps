@@ -1,0 +1,152 @@
+body {
+  padding-top: 35px; /* so BS narbar doesn't overlap site! */
+  font: 18.5px Palatino, 'Palatino Linotype', Helvetica, Arial, Verdana,
+    sans-serif;
+  text-align: justify;
+}
+
+#header {
+  font-family: Lato;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+#navigation {
+  padding-top: 0px;
+}
+
+h1 {
+  font-family: Lato;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.site {
+  padding-top: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 0px;
+  /*line-height: 1.8em;*/
+}
+
+.form {
+  padding: 15px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+.form label {
+  margin-top: 18px;
+}
+
+.form .btn {
+  margin-top: 18px;
+}
+
+.form .checkbox-inline {
+  margin-bottom: 18px;
+}
+
+.map_container{
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 72px);
+  /* padding-bottom: 46%; 52% for 16:9 screen */
+}
+
+.map_container .map_canvas{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.table {
+  font-size: 12px;
+}
+
+tfoot input {
+  width: 100%;
+  padding: 3px;
+  box-sizing: border-box;
+}
+
+tfoot tr th select{
+  -webkit-appearance: menulist-button;
+  height: 27px;
+}
+
+table.dataTable tfoot th {
+  padding: 0px;
+}
+
+div.ColVis {
+  margin-bottom: 0em; /* override DT 1em value */
+}
+
+div.DTTT_container {
+  margin-bottom: 0em; /* override DTTT 1em value */
+}
+
+td div {
+  height: 68px; /* magic number to allow 4 text lines at 12pt font with 2px padding and line-spacing of 1.42857143! */
+  overflow: scroll;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+td div.long-text {
+  max-width: 700px;
+  text-align: justify;
+}
+
+.infobox{
+  z-index: 999; /* ensure always on top */
+  position:relative;
+  background-color:white;
+  border:1px solid rgb(136, 136, 136);
+  left:0px;
+  top:0px;
+  min-width: 256px;
+  min-height: 60px;
+}
+
+.infobox_title{
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 200%;
+}
+
+.infobox_close{
+  cursor:pointer;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  border:none;
+}
+
+.infobox_content{
+  margin:5px;
+  font-family: Arial;
+  font-size:11px;
+  font-weight: bold;
+  line-height:16px;
+}
+
+.infobox_content .description{
+  font-weight: normal;
+}
+
+.infobox_pointer{
+  width:33px;
+  height:38px;
+  overflow:hidden;
+  position:relative;
+  z-index:1;
+  left:20px;
+  top:-1px;
+}
