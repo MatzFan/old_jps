@@ -4,6 +4,7 @@ ruby '2.5.1'
 source 'https://rubygems.org'
 
 gem 'haml', '5.0.4'
+gem 'pony', '1.12'
 gem 'puma', '3.12.0'
 gem 'rake', '12.3.1'
 gem 'sinatra', '2.0.3', require: 'sinatra/base'

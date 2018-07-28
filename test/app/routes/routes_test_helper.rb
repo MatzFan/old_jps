@@ -12,3 +12,8 @@ require 'capybara/minitest'
 require 'capybara/dsl'
 
 Capybara.app = Jps::App
+
+def page_under_test
+  visit "/#{caller[0..0].first[/in `(.*)'/, 1].split('_')[1]}"
+  page
+end

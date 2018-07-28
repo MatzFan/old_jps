@@ -3,11 +3,9 @@
 module Jps
   module Routes
     # the app
-    class Page < Base
-      set :server, :puma
-
+    class Home < Base
       get '/' do
-        haml :layout
+        haml :home
       end
     end
   end

@@ -16,6 +16,7 @@ module Jps
   # the app
   class App < Sinatra::Application
     use Jps::Routes::Base
-    use Jps::Routes::Page
+    use Jps::Routes::Home
+    use Jps::Routes::Contact
   end
 end

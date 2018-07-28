@@ -1,0 +1,15 @@
+.container
+  .row
+    .col-md-6.offset-sm-3
+      %form{action: '/contact', method: 'post'}
+        .form-group
+          %label{for: "exampleInputEmail1"} Your email address
+          %input#exampleInputEmail1.form-control{"aria-describedby" => "emailHelp", placeholder: "Email", type: "email", name: 'email'}
+          %small#emailHelp.form-text.text-muted We'll never share your email with anyone else.
+        .form-group
+          %label{for: "exampleInputPassword1"} Your name
+          %input#exampleInputPassword1.form-control{placeholder: "Name", type: "name", name: 'name'}
+        .form-group
+          %label{for: "exampleFormControlTextarea1"} Your message
+          %textarea#exampleFormControlTextarea1.form-control{placeholder: 'Message', rows: '3', name: 'msg'}
+        %button.btn.btn-primary{type: 'submit'} Submit

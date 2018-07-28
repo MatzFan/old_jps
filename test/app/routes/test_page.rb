@@ -5,8 +5,11 @@ require_relative 'routes_test_helper'
 class HomeTest < Minitest::Test
   include Capybara::DSL
 
-  def test_home
-    visit '/'
-    assert page.has_content? 'jerseypropertyservices.com'
+  def test_
+    assert page_under_test.has_content? 'jerseypropertyservices.com'
+  end
+
+  def test_contact
+    assert page_under_test.has_content? 'Your message'
   end
 end
