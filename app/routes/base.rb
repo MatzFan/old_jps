@@ -8,10 +8,10 @@ module Jps
     class Base < Sinatra::Application
       configure do
         set :server, :puma
+        set :sessions, true
         set :views, 'app/views'
-        set :root, File.expand_path('../../', __dir__)
+        # set :root, File.expand_path('../../', __dir__)
         set :mail_options, MailConfig.mail_options
-        set :foo, 'bar'
       end
     end
   end

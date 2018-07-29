@@ -7,10 +7,13 @@ gem 'haml', '5.0.4'
 gem 'pony', '1.12'
 gem 'puma', '3.12.0'
 gem 'rake', '12.3.1'
+gem 'sequel', '5.10.0'
+gem 'sequel_pg', '1.11.0', require: 'sequel' # faster C adapter
 gem 'sinatra', '2.0.3', require: 'sinatra/base'
 
 group :test do
   gem 'capybara', '3.4.2'
+  gem 'database_cleaner', '1.7.0'
   gem 'minitest', '5.11.3'
   gem 'rack-test', '1.1.0'
 end
