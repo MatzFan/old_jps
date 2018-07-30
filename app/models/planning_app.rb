@@ -19,10 +19,6 @@ class PlanningApp < Sequel::Model
   #   self.app_number = code_year_number[2].to_i
   #   self.order = app_year * 10_000 + app_number
   #   self.app_full_address = build_address
-  #   self.app_address_of_applicant = build_address_of_applicant
-  #   self.mapped = latitude && longitude
-  #   self.geom = set_geom(latitude, longitude) if mapped
-  #   self.list_app_constraints = breakify(all_constraints)
   #   super
   # end
 
@@ -41,6 +37,21 @@ class PlanningApp < Sequel::Model
   def after_save
     add_constraints
   end
+
+  DETAILS_TABLE_TITLES = %w[Reference Category Status Officer Applicant
+                            Description ApplicationAddress RoadName Parish
+                            PostCode Constraints Agent].freeze
+
+  DETAILS_FIELDS = %i[app_ref app_category app_status app_officer app_applicant
+                      app_description app_address app_road app_parish
+                      app_postcode app_constraints app_agent].freeze
+
+  DATES_TABLE_TITLES = %w[ValidDate AdvertisedDate endpublicityDate
+                          SitevisitDate CommitteeDate Decisiondate
+                          Appealdate].freeze
+
+  DATES_FIELDS = %i[date_valid date_advertised date_end_pub date_site_visit
+                    date_committee date_decision date_appeal].freeze
 
   # # def self.latest_app_num_for(year)
   # #   apps = where(app_year: year).order(:order).last

@@ -20,6 +20,7 @@ module Jps
   class App < Sinatra::Application
     set :database, -> { DB } # set in config/database
     Dir.glob('./app/{models}/*.rb').each { |file| require file } # needed?
+    Dir.glob('./lib/**/*.rb').each { |file| require file } # needed?
 
     use Jps::Routes::Base
     use Jps::Routes::Home
