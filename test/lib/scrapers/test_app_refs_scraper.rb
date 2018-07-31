@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../test_helper'
-require 'scrapers/app_refs_scraper'
+require_relative '../../../lib/scrapers/app_refs_scraper'
 
 class AppRefsScraperTest < Minitest::Test
   def self.refs_from_page_146

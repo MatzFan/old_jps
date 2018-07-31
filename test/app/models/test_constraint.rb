@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../test_helper'
-require 'app/models/constraint'
+require_relative '../../../app/models/constraint'
 
 class ConstraintTest < Minitest::Test
   def setup

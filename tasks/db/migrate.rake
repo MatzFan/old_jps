@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 namespace :db do
-  desc 'Migrate DB [to version]'
+  desc 'Migrate DB [to version] <environment>'
   task :migrate, [:version] do |_t, args|
     version = (v = args[:version]) ? v.to_i : nil
     ARGV.each { |a| task a.to_sym }

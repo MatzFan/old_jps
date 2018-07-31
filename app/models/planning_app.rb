@@ -12,15 +12,15 @@ class PlanningApp < Sequel::Model
   one_to_many :planning_app_constraints, key: :app_ref
   many_to_many :constraints, left_key: :app_ref, right_key: :name
 
-  # def before_validation
-  #   code_year_number = app_ref.split('/')
-  #   self.app_code = code_year_number[0]
-  #   self.app_year = code_year_number[1].to_i
-  #   self.app_number = code_year_number[2].to_i
-  #   self.order = app_year * 10_000 + app_number
-  #   self.app_full_address = build_address
-  #   super
-  # end
+  def before_validation
+    code_year_number = app_ref.split('/')
+    self.app_code = code_year_number[0]
+    self.app_year = code_year_number[1].to_i
+    self.app_number = code_year_number[2].to_i
+    self.order = app_year * 10_000 + app_number
+    self.app_address = build_address
+    super
+  end
 
   def before_save
     DB.transaction do
@@ -29,7 +29,6 @@ class PlanningApp < Sequel::Model
       create_parent(Status, name: app_status)
       create_parent(ParishAlias, name: app_parish)
       create_parent(AgentAlias, name: app_agent)
-      create_parish(parish_alias)
     end
     super
   end
@@ -38,20 +37,12 @@ class PlanningApp < Sequel::Model
     add_constraints
   end
 
-  DETAILS_TABLE_TITLES = %w[Reference Category Status Officer Applicant
-                            Description ApplicationAddress RoadName Parish
-                            PostCode Constraints Agent].freeze
+  TABLE_COLS = %i[order date_valid app_ref app_code app_status app_address
+                  app_description app_applicant app_agent app_officer
+                  app_parish app_constraints].freeze
 
-  DETAILS_FIELDS = %i[app_ref app_category app_status app_officer app_applicant
-                      app_description app_address app_road app_parish
-                      app_postcode app_constraints app_agent].freeze
-
-  DATES_TABLE_TITLES = %w[ValidDate AdvertisedDate endpublicityDate
-                          SitevisitDate CommitteeDate Decisiondate
-                          Appealdate].freeze
-
-  DATES_FIELDS = %i[date_valid date_advertised date_end_pub date_site_visit
-                    date_committee date_decision date_appeal].freeze
+  TABLE_TITLES = %w[Order Date Reference Code Status Address Description
+                    Applicant Agent Officer Parish Constraints].freeze
 
   # # def self.latest_app_num_for(year)
   # #   apps = where(app_year: year).order(:order).last
@@ -60,13 +51,13 @@ class PlanningApp < Sequel::Model
 
   private
 
+  def build_address
+    self.app_address = [app_house, app_road, app_parish, app_postcode].compact.join("\n")
+  end
+
   def create_parent(klass, opts)
     # klass.find_or_create(opts) if send("app_#{klass.to_s.downcase}".to_sym)
     klass.find_or_create(opts) if opts.values.first
-  end
-
-  def create_parish(parish_alias)
-    self.parish = parish_alias.parish.name if parish_alias&.parish
   end
 
   def constraints_list

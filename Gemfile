@@ -16,6 +16,7 @@ group :test do
   gem 'capybara', '3.4.2'
   gem 'database_cleaner', '1.7.0'
   gem 'minitest', '5.11.3'
+  gem 'poltergeist', '1.18.1' # phantomjs 2.1.1
   gem 'rack-test', '1.1.0'
 end
 

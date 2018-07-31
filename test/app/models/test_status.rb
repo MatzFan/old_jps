@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../test_helper'
-require 'app/models/status'
+require_relative '../../../app/models/status'
 
 class StatusTest < Minitest::Test
   def setup

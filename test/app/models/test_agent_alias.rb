@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../test_helper'
-require 'app/models/agent_alias'
+require_relative '../../../app/models/agent_alias'
 
 class AgentAliasTest < Minitest::Test
   def setup

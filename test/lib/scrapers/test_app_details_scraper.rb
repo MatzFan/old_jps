@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 require_relative '../../test_helper'
-require 'scrapers/app_details_scraper'
+require_relative '../../../lib/scrapers/app_details_scraper'
 
-class AppDetialsScraperTest < Minitest::Test
+class AppDetailsScraperTest < Minitest::Test
   def self.details_hash
     { app_ref: 'RW/2014/0548', app_category: 'RW', app_status: 'Upheld',
       app_officer: 'Richard Greig', app_applicant: 'Mr & Mrs R.I.G. Hardcastle',
       app_description: 'Replace 5 No. windows on South elevation..... '\
         'REQUEST FOR RECONSIDERATION for refusal of planning permission.',
-      app_address: 'Homewood', app_road: 'Le Mont Sohier',
+      app_house: 'Homewood', app_road: 'Le Mont Sohier',
       app_parish: 'St. Brelade', app_postcode: 'JE3 8EA',
       app_constraints: 'Built-Up Area, Green Backdrop Zone, Potential Listed '\
         'Building, Primary Route Network', app_agent: nil, # no agent here

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../test_helper'
-require 'app/models/planning_app'
+require_relative '../../../app/models/planning_app'
 
 class PlanningAppTest < Minitest::Test
   def setup
@@ -26,11 +26,7 @@ class PlanningAppTest < Minitest::Test
     end
   end
 
-  def test_parish
-    # assert_equal 'Trinity', @app.parish_alias.parish.name
-  end
-
-  def test_constriants
+  def test_constraints
     assert_equal %w[Airport Green\ Zone], @app.constraints.map(&:name).sort
   end
 end

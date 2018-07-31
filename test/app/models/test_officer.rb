@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../test_helper'
-require 'app/models/officer'
+require_relative '../../../app/models/officer'
 
 class OfficerTest < Minitest::Test
   def setup

@@ -4,9 +4,9 @@ Sequel.migration do
   change do
     create_table :planning_apps do
       String :app_ref, primary_key: true
-      # String :app_code
-      # Integer :app_year
-      # Integer :app_number
+      String :app_code
+      Integer :app_year
+      Integer :app_number
       foreign_key :app_agent, :agent_aliases, type: String
       foreign_key :app_category, :categories, type: String
       foreign_key :app_officer, :officers, type: String
@@ -16,6 +16,7 @@ Sequel.migration do
       String :app_address
       String :app_constraints
       String :app_description
+      String :app_house
       String :app_postcode
       String :app_road
       Float :latitude
@@ -27,7 +28,7 @@ Sequel.migration do
       Date :date_committee
       Date :date_decision
       Date :date_appeal
-      # Integer :order, unique: true # removed unique constraint in migration 18
+      Integer :order
     end
   end
 end

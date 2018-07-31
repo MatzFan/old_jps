@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../test_helper'
-require 'app/models/category'
+require_relative '../../../app/models/category'
 
 class CategoryTest < Minitest::Test
   def setup

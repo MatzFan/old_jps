@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../test_helper'
-require 'app/models/parish_alias'
+require_relative '../../../app/models/parish_alias'
 
 class ParishAliasTest < Minitest::Test
   def setup
@@ -14,6 +14,6 @@ class ParishAliasTest < Minitest::Test
   end
 
   def parish
-    assert_instance_of Parish, @alias.parish
+    assert_equal 'St. Mary', @alias.parish.name
   end
 end

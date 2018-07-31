@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../test_helper'
-require 'app/models/parish'
+require_relative '../../../app/models/parish'
 
 class ParishTest < Minitest::Test
   def setup

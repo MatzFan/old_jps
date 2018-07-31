@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'config/mail' # MailConfig namespace
+require_relative '../../config/mail' # MailConfig namespace
 
 module Jps
   module Routes

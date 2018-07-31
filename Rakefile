@@ -2,10 +2,20 @@
 
 require 'rake/testtask'
 require_relative 'config/database'
-load 'tasks/db/migrate.rake'
 
-# only load other tasks (which may use models) if DB is set up by above
-# Dir.glob('./tasks/**/*.rake').each { |r| load r } unless DB.tables.empty?
+mig = './tasks/db/migrate.rake'
+load mig
+
+other_tasks = Dir.glob('./tasks/**/*.rake') - Dir[mig]
+latest = Dir['./db/migrations/*'].max.split('_').first.split('/').last.to_i
+
+begin
+  migrated = DB[:schema_info].first[:version].to_i == latest
+rescue Sequel::DatabaseError
+  migrated = false
+end
+
+other_tasks.each { |r| load r } if migrated
 
 # Rake::TestTask.new do |t|
 #   # t.libs << 'test' # t.libs = ['lib']
