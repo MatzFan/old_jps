@@ -3,8 +3,9 @@
 require_relative '../../test_helper'
 require_relative '../../../app/models/parish_alias'
 
-class ParishAliasTest < Minitest::Test
+class ParishAliasTest < JpsTest
   def setup
+    super
     ParishAlias.create(name: 'St Mary')
     @alias = ParishAlias.first
   end

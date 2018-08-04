@@ -2,7 +2,7 @@
 
 ENV['RACK_ENV'] = 'test'
 
-require_relative '../../test_helper'
+require_relative '../test_helper'
 
 require 'rack/test'
 require 'capybara'
@@ -13,16 +13,16 @@ require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist # phantomjs dep
 Capybara.app = Jps::App
 
-def page_under_test
-  visit "/#{caller[0..0].first[/in `(.*)'/, 1].split('_')[1..-1].join('/')}"
-  page
-end
-
-class CapybaraTestCase < Minitest::Test
+class CapybaraTestCase < JpsTest
   include Capybara::DSL
   include Capybara::Minitest::Assertions
 
+  def setup
+    super
+  end
+
   def teardown
+    super
     Capybara.reset_sessions!
     Capybara.use_default_driver
   end

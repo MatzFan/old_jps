@@ -3,8 +3,9 @@
 require_relative '../../test_helper'
 require_relative '../../../app/models/category'
 
-class CategoryTest < Minitest::Test
+class CategoryTest < JpsTest
   def setup
+    super
     Category.create(code: 'P')
     @category = Category.first
   end

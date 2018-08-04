@@ -1,0 +1,11 @@
+.container-fluid
+  .row
+    .col-md-4.offset-sm-3
+      %form{action: '/sessions/create', method: 'post'}
+        .form-group
+          %label{for: "exampleInputEmail1"} email
+          %input#exampleInputEmail1.form-control{"aria-describedby" => "emailHelp", placeholder: "Email", type: "email", name: 'email'}
+        .form-group
+          %label{for: "exampleInputPassword1"} password
+          %input#exampleInputPassword1.form-control{placeholder: "Password", type: "password", name: 'password'}
+        %button.btn.btn-primary{type: 'submit'} Sign in

@@ -3,10 +3,11 @@
 require_relative '../../test_helper'
 require_relative '../../../app/models/status'
 
-class StatusTest < Minitest::Test
+class StatusTest < JpsTest
   def setup
+    super
     Status.create(name: 'pending')
-    @status = Status.new
+    @status = Status.first
   end
 
   def test_save

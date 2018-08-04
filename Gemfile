@@ -3,6 +3,7 @@
 ruby '2.5.1'
 source 'https://rubygems.org'
 
+gem 'bcrypt', '3.1.12'
 gem 'haml', '5.0.4'
 gem 'mechanize', '2.7.6'
 gem 'pony', '1.12'
@@ -21,6 +22,8 @@ group :test do
 end
 
 group :development do
+  # gem 'better_errors', '2.4.0'
+  # gem 'binding_of_caller', '0.8.0'
   gem 'guard', '2.14.2'
   gem 'guard-minitest', '2.4.6'
   gem 'libnotify', '0.9.4'

@@ -3,10 +3,16 @@
 require_relative '../../test_helper'
 require_relative '../../../app/models/parish'
 
-class ParishTest < Minitest::Test
+class ParishTest < JpsTest
   def setup
-    Parish.create(number: 1, name: 'Trinity')
+    super
+    Parish.create(number: 13, name: 'St. Elsewhere')
     @parish = Parish.first
+  end
+
+  def teardown
+    super
+    Parish[13].delete
   end
 
   def test_save

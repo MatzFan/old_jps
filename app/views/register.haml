@@ -1,7 +1,7 @@
 .container-fluid
   .row
     .col-md-4.offset-sm-3
-      %form{action: '/contact', method: 'post'}
+      %form{action: '/users/create', method: 'post'}
         .form-group
           %label{for: "exampleInputEmail1"} Your email address
           %input#exampleInputEmail1.form-control{"aria-describedby" => "emailHelp", placeholder: "Email", type: "email", name: 'email'}
@@ -10,6 +10,6 @@
           %label{for: "exampleInputPassword1"} Your name
           %input#exampleInputPassword1.form-control{placeholder: "Name", type: "name", name: 'name'}
         .form-group
-          %label{for: "exampleFormControlTextarea1"} Your message
-          %textarea#exampleFormControlTextarea1.form-control{placeholder: 'Message', rows: '3', name: 'msg'}
-        %button.btn.btn-primary{type: 'submit'} Send
+          %label{for: "exampleInputPassword1"} Password
+          %input#exampleInputPassword1.form-control{placeholder: "Password", type: "password", name: 'password'}
+        %button.btn.btn-primary{type: 'submit'} Register

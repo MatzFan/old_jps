@@ -3,8 +3,9 @@
 require_relative '../../test_helper'
 require_relative '../../../app/models/planning_app'
 
-class PlanningAppTest < Minitest::Test
+class PlanningAppTest < JpsTest
   def setup
+    super
     PlanningApp.create(app_ref: 'P/2018/0877', app_category: 'P',
                        app_status: 'Pending', app_officer: 'Joe Bloggs',
                        app_applicant: 'John', app_description: 'build',

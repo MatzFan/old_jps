@@ -10,7 +10,21 @@
     %script{src: '/bootstrap.min.js'}
   %body
     = haml :_navigation
+    .container-fluid
+    - if @msg
+      - if @msg[:success]
+        .alert.alert-success{:role => "alert", 'data-dismiss' => 'alert'}
+          %strong
+            = @msg[:success]
+      - if @msg[:failure]
+        .alert.alert-danger{:role => "alert", 'data-dismiss' => 'alert'}
+          %strong
+            = @msg[:failure]
     .container-fluid.site
       = yield
   %ul.navbar.fixed-bottom
     %p.copyright &copy; 2018 jerseypropertyservices.com
+:javascript
+  $(function(){
+    $(".alert").fadeOut(4000);
+  });

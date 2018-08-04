@@ -31,7 +31,7 @@ class AppDetailsScraperTest < Minitest::Test
   end
 
   def self.scraper
-    @scraper ||= AppDetailsScraper.new(['RW/2014/0548', 'A/bad/app_ref'])
+    @scraper ||= AppDetailsScraper.new(['RW/2014/0548', 'A/bad/app_ref']) # lazy
   end
 
   def test_new

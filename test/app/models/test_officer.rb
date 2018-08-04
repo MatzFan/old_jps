@@ -3,10 +3,11 @@
 require_relative '../../test_helper'
 require_relative '../../../app/models/officer'
 
-class OfficerTest < Minitest::Test
+class OfficerTest < JpsTest
   def setup
+    super
     Officer.create(name: 'Joe Bloggs')
-    @officer = Officer.new
+    @officer = Officer.first
   end
 
   def test_save

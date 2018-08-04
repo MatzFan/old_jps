@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
-require_relative '../../config/mail' # MailConfig namespace
+require_relative '../helpers/sessions_helper'
 
 module Jps
   module Routes
     # base for all routes
     class Base < Sinatra::Application
+      set :session_secret, ENV['JPS_SESSION_SECRET']
+      enable :sessions
+
       configure do
         set :server, :puma
-        set :sessions, true
         set :views, 'app/views'
-        # set :root, File.expand_path('../../', __dir__)
-        set :mail_options, MailConfig.mail_options
       end
     end
   end
