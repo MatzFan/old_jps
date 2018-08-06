@@ -6,11 +6,11 @@ require_relative '../../lib/scrapers/app_details_scraper'
 class UserLoginTest < CapybaraTestCase
   def setup
     super
-    User.create name: 'Joe', email: 'joe@mail.com', password: 'pass'
+    create_test_user
   end
 
-  def test_user_login
-    visit '/login'
-    assert true
+  def test_user_login_redirects_to_applications_index
+    login_test_user
+    assert_current_path '/applications/index'
   end
 end

@@ -4,6 +4,7 @@ require_relative 'feature_test_helper'
 
 class ContactPageTest < CapybaraTestCase
   def teardown
+    super
     Mail::TestMailer.deliveries.clear
   end
 

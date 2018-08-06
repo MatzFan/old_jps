@@ -4,7 +4,7 @@ module Jps
   module Routes
     # the Contact page
     class Index < Base
-      # before { redirect('/login') unless signed_in? }
+      before { redirect('/login') unless signed_in? }
 
       get '/applications/index' do
         haml :index

@@ -3,6 +3,11 @@
 require_relative 'feature_test_helper'
 
 class HomePageTest < CapybaraTestCase
+  def setup
+    super
+    create_test_user
+  end
+
   def test_navbar_links
     visit '/'
     assert_link 'Applications'
@@ -13,8 +18,9 @@ class HomePageTest < CapybaraTestCase
   end
 
   def test_logged_in_user_navbar_links
-    # visit '/'
-    # assert_link 'Edit profile'
-    # assert_link 'Logout'
+    login_test_user
+    visit '/'
+    assert_link 'Edit profile'
+    assert_link 'Logout'
   end
 end

@@ -2,12 +2,12 @@
 %html{:lang => "en-GB"}
   %head
     %title jerseypropertyservices.com
-    %meta{ content: "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
-    %link(rel="stylesheet" href="/bootstrap.min.css")
-    %link(rel="stylesheet" href="/site.css")
-    %script{src: '/jquery-3.3.1.min.js'}
-    %script{src: '/popper-1.14.3.min.js'}
-    %script{src: '/bootstrap.min.js'}
+    %meta{content: "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
+    %link{rel: 'stylesheet', href: '/bootstrap.min.css', type: 'text/css'}
+    %link{rel: 'stylesheet', href: '/site.css', type: 'text/css'}
+    %script{src: '/jquery-3.3.1.min.js', type: 'application/javascript'}
+    %script{src: '/popper-1.14.3.js', type: 'application/javascript'}
+    %script{src: '/bootstrap.min.js', type: 'application/javascript'}
   %body
     = haml :_navigation
     .container-fluid
@@ -22,9 +22,9 @@
             = @msg[:failure]
     .container-fluid.site
       = yield
-  %ul.navbar.fixed-bottom
-    %p.copyright &copy; 2018 jerseypropertyservices.com
-:javascript
-  $(function(){
-    $(".alert").fadeOut(4000);
-  });
+    %ul.navbar.fixed-bottom
+      %p.copyright &copy; 2018 jerseypropertyservices.com
+    :javascript
+      $(function(){
+        $(".alert").fadeOut(4000);
+      });

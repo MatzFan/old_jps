@@ -6,11 +6,11 @@ require_relative '../../../app/models/officer'
 class OfficerTest < JpsTest
   def setup
     super
-    Officer.create(name: 'Joe Bloggs')
-    @officer = Officer.first
+    @officer = Officer.new(name: 'Joe Bloggs')
   end
 
   def test_save
-    assert @officer
+    @officer.save
+    assert_equal 1, Officer.count
   end
 end

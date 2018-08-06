@@ -6,11 +6,11 @@ require_relative '../../../app/models/agent_alias'
 class AgentAliasTest < JpsTest
   def setup
     super
-    AgentAlias.create(name: 'A.N. Agent')
-    @alias = AgentAlias.first
+    @alias = AgentAlias.new(name: 'A.N. Agent')
   end
 
   def test_save
-    assert @alias
+    @alias.save
+    assert_equal 1, AgentAlias.count
   end
 end

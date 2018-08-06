@@ -26,4 +26,20 @@ class CapybaraTestCase < JpsTest
     Capybara.reset_sessions!
     Capybara.use_default_driver
   end
+
+  def create_test_user
+    @user = User.create name: 'joe', email: 'joe@m.com', password: 'pass'
+  end
+
+  def login_test_user
+    visit '/login'
+    fill_in 'email', with: 'joe@m.com'
+    fill_in 'password', with: 'pass'
+    click_button 'Sign in'
+  end
+
+  def logout_test_user
+    visit '/'
+    click_button 'Logout'
+  end
 end

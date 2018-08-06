@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'rake/testtask'
+# require 'rake/testtask'
 require_relative 'config/database'
 
-mig = './tasks/db/migrate.rake'
-load mig
+migrate = './tasks/db/migrate.rake'
+load migrate
 
-other_tasks = Dir.glob('./tasks/**/*.rake') - Dir[mig]
+other_tasks = Dir.glob('./tasks/**/*.rake') - Dir[migrate]
 latest = Dir['./db/migrations/*'].max.split('_').first.split('/').last.to_i
 
 begin
@@ -15,7 +15,10 @@ rescue Sequel::DatabaseError
   migrated = false
 end
 
-other_tasks.each { |r| load r } if migrated
+if migrated
+  require_relative 'app'
+  other_tasks.each { |r| load r }
+end
 
 # Rake::TestTask.new do |t|
 #   # t.libs << 'test' # t.libs = ['lib']

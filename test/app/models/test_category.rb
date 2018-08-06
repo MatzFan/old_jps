@@ -6,11 +6,11 @@ require_relative '../../../app/models/category'
 class CategoryTest < JpsTest
   def setup
     super
-    Category.create(code: 'P')
-    @category = Category.first
+    @category = Category.new(code: 'Z')
   end
 
   def test_save
-    assert @category
+    @category.save
+    assert_equal 1, Category.count
   end
 end

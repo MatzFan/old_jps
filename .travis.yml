@@ -9,5 +9,6 @@ before_script:
 - sudo apt-get update -qq
 - sudo -u postgres psql -c "create database jps_test;"
 - bundle exec rake db:migrate test
+- bundle exec rake db:seed
 
 script: bundle exec rake test

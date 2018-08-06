@@ -6,8 +6,7 @@ require_relative '../../../app/models/parish'
 class ParishTest < JpsTest
   def setup
     super
-    Parish.create(number: 13, name: 'St. Elsewhere')
-    @parish = Parish.first
+    @parish = Parish.new(number: 13, name: 'St. Elsewhere')
   end
 
   def teardown
@@ -16,6 +15,7 @@ class ParishTest < JpsTest
   end
 
   def test_save
-    assert @parish
+    @parish.save
+    assert_equal 13, Parish.count
   end
 end

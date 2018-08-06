@@ -3,6 +3,14 @@
 require 'bundler'
 Bundler.require
 
+
+# Rack::Mime::MIME_TYPES.merge!('.min.css' => 'text/css',
+#                               '.min.js'  => 'application/javascript')
+
+
+
+
+
 require 'sinatra/base'
 require 'haml'
 
@@ -12,15 +20,17 @@ require_relative 'config/mail'
 
 require_relative 'app/routes/base'
 Dir["#{__dir__}/app/routes/*.rb"].each { |f| require_relative f }
+Dir.glob('./app/{models}/*.rb').each { |file| require file } # needed?
+Dir.glob('./lib/**/*.rb').each { |file| require file } # needed?
 
 module Jps
   # the app
   class App < Sinatra::Application
-    # helpers Sinatra::sessions_helper - if subclassing Sinatra::Base
+    set :server, :puma
     set :database, -> { DB } # set in config/database
-    Dir.glob('./app/{models}/*.rb').each { |file| require file } # needed?
-    Dir.glob('./lib/**/*.rb').each { |file| require file } # needed?
-
+    set :sessions, httponly: true,
+                   secure:   false,
+                   secret:   ENV['JPS_SESSION_SECRET']
     use Jps::Routes::Base
     use Jps::Routes::Home
     use Jps::Routes::Contact

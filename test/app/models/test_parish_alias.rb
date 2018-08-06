@@ -6,15 +6,16 @@ require_relative '../../../app/models/parish_alias'
 class ParishAliasTest < JpsTest
   def setup
     super
-    ParishAlias.create(name: 'St Mary')
-    @alias = ParishAlias.first
+    @alias = ParishAlias.new(name: 'New Parish')
   end
 
   def test_save
-    assert @alias
+    @alias.save
+    assert_equal 1, ParishAlias.count
   end
 
   def parish
-    assert_equal 'St. Mary', @alias.parish.name
+    parish_alias = @alias.save
+    assert_equal 'New Parish', parish_alias.parish.name
   end
 end

@@ -1,7 +1,7 @@
 #table-placeholder
 
-%script{src: '/datatables-1.10.18.min.js'}
-%script{src: '/draw_apps_table.js'}
+%script{src: '/datatables-1.10.18.min.js', type: 'application/javascript'}
+%script{src: '/draw_apps_table.js', type: 'application/javascript'}
 
 :javascript
   $.getJSON("data.json", function(data) {
@@ -9,3 +9,5 @@
       var table = $('#tbl').DataTable();
     });
   });
+
+
