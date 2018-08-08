@@ -7,16 +7,9 @@ migrate = './tasks/db/migrate.rake'
 load migrate
 
 other_tasks = Dir.glob('./tasks/**/*.rake') - Dir[migrate]
-latest = Dir['./db/migrations/*'].max.split('_').first.split('/').last.to_i
 
-begin
-  migrated = DB[:schema_info].first[:version].to_i == latest
-rescue Sequel::DatabaseError
-  migrated = false
-end
-
-if migrated
-  require_relative 'app'
+if Sequel::Migrator.is_current?(DB, 'db/migrations')
+  require_relative('app')
   other_tasks.each { |r| load r }
 end
 

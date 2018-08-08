@@ -3,7 +3,7 @@
 module Jps
   module Routes
     # the Contact page
-    class Index < Base
+    class Applications < Base
       before { redirect('/login') unless signed_in? }
 
       get '/applications/index' do
@@ -17,7 +17,7 @@ module Jps
         end, app_data: apps }.to_json
       end
 
-      get 'map' do
+      get '/applications/map' do
       end
     end
   end

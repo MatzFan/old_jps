@@ -23,12 +23,12 @@ class CapybaraTestCase < JpsTest
 
   def teardown
     super
-    Capybara.reset_sessions!
+    Capybara.reset_sessions! # will logout test user
     Capybara.use_default_driver
   end
 
-  def create_test_user
-    @user = User.create name: 'joe', email: 'joe@m.com', password: 'pass'
+  def test_user
+    User.new name: 'joe', email: 'joe@m.com', password: 'pass'
   end
 
   def login_test_user

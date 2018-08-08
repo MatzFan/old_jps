@@ -3,14 +3,6 @@
 require 'bundler'
 Bundler.require
 
-
-# Rack::Mime::MIME_TYPES.merge!('.min.css' => 'text/css',
-#                               '.min.js'  => 'application/javascript')
-
-
-
-
-
 require 'sinatra/base'
 require 'haml'
 
@@ -20,8 +12,8 @@ require_relative 'config/mail'
 
 require_relative 'app/routes/base'
 Dir["#{__dir__}/app/routes/*.rb"].each { |f| require_relative f }
-Dir.glob('./app/{models}/*.rb').each { |file| require file } # needed?
-Dir.glob('./lib/**/*.rb').each { |file| require file } # needed?
+Dir.glob('./app/{models}/*.rb').each { |file| require file }
+Dir.glob('./lib/**/*.rb').each { |file| require file }
 
 module Jps
   # the app
@@ -36,6 +28,6 @@ module Jps
     use Jps::Routes::Contact
     use Jps::Routes::UserRoutes
     use Jps::Routes::Session
-    use Jps::Routes::Index
+    use Jps::Routes::Applications
   end
 end
