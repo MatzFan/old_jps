@@ -6,11 +6,10 @@ require_relative '../../../app/models/constraint'
 class ConstraintTest < JpsTest
   def setup
     super
-    @constraint = Constraint.new(name: 'New Constraint')
+    Constraint.create(name: 'New Constraint')
   end
 
   def test_save
-    @constraint.save
     assert_equal 1, Constraint.count
   end
 end

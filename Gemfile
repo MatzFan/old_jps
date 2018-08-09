@@ -22,8 +22,6 @@ group :test do
 end
 
 group :development do
-  # gem 'better_errors', '2.4.0'
-  # gem 'binding_of_caller', '0.8.0'
   gem 'guard', '2.14.2'
   gem 'guard-minitest', '2.4.6'
   gem 'libnotify', '0.9.4'

@@ -17,18 +17,14 @@ class CapybaraTestCase < JpsTest
   include Capybara::DSL
   include Capybara::Minitest::Assertions
 
-  def setup
-    super
-  end
-
   def teardown
-    super
     Capybara.reset_sessions! # will logout test user
+    super
     Capybara.use_default_driver
   end
 
-  def test_user
-    User.new name: 'joe', email: 'joe@m.com', password: 'pass'
+  def create_test_user
+    User.create name: 'joe', email: 'joe@m.com', password: 'pass'
   end
 
   def login_test_user

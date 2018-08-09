@@ -6,7 +6,6 @@ Bundler.require
 require 'sinatra/base'
 require 'haml'
 
-# require 'better_errors'
 require_relative 'config/database'
 require_relative 'config/mail'
 

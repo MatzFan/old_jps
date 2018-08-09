@@ -18,6 +18,7 @@ module Jps
       end
 
       get '/applications/map' do
+        haml :map
       end
     end
   end

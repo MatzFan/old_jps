@@ -6,7 +6,7 @@ require_relative '../../lib/scrapers/app_details_scraper'
 class UserLoginTest < CapybaraTestCase
   def setup
     super
-    test_user.save
+    create_test_user
   end
 
   def test_user_login_redirects_to_applications_index

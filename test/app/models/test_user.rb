@@ -7,11 +7,10 @@ class UserTest < JpsTest
   def setup
     super
     User.create(name: 'Joe', email: 'joe@mail.com', password: 'pass')
-    @user = User.first
   end
 
   def test_save
-    assert @user
+    assert_equal 1, User.count
   end
 
   def test_email_must_be_unique
@@ -20,6 +19,6 @@ class UserTest < JpsTest
   end
 
   def test_password_digest
-    assert_equal 60, @user.password_hash.size # bcrypt hash
+    assert_equal 60, User.first.password_hash.size # bcrypt hash
   end
 end

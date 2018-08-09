@@ -7,10 +7,9 @@ class StatusTest < JpsTest
   def setup
     super
     Status.create(name: 'pending')
-    @status = Status.first
   end
 
   def test_save
-    assert @status
+    assert_equal 1, Status.count
   end
 end

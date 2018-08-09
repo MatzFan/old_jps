@@ -5,13 +5,11 @@ require_relative 'feature_test_helper'
 class HomePageTest < CapybaraTestCase
   def setup
     super
-    test_user.save
+    create_test_user
   end
 
   def test_navbar_links
     visit '/'
-
-    assert true
     assert_link 'Applications'
     assert_link 'Map'
     assert_link 'Contact'
