@@ -1,7 +1,8 @@
 function drawAppsTable(data, callback) {
   var columns = data.columns;
   var appData = data.app_data;
-  var selectCols = [3, 4, 10];
+  var lovTitles = data.lov_titles;
+  var constraints = data.constraints; // array
   var thDivs = $(columns).map(function() {
     return "<th>"+this.title+"</th>";
   }).get().join('');
@@ -14,28 +15,52 @@ function drawAppsTable(data, callback) {
     // "stateSave": true, // buggers initial ordering
     "data": appData,
     "columns": columns,
+    columnDefs: [{
+      targets: 1,
+      render: $.fn.dataTable.render.moment('DD/MM/YYYY') // moment.js dep
+    }],
+    select: {
+      style: 'multi'
+    },
+        
 
-    initComplete: function () {
+    initComplete: function() {
       this.api().columns().every(function() {
         var column = this;
+        var title = $(column.header()).text();
+        var val_select = $('<select><option value=""></option></select>')
 
 
-        if(selectCols.includes(this.index())) {
+        if(lovTitles.includes(title)) {
 
-
-          var val_select = $('<select><option value=""></option></select>')
-            .appendTo($(column.footer()).empty())
+            val_select.appendTo($(column.footer()).empty())
             .on('change', function() {
               var val = $.fn.dataTable.util.escapeRegex($(this).val());
-              column.search(val ? '^'+val+'$' : '', true, false).draw();
+                column.search(val ? '^'+val+'$' : '', true, false).draw(); // different
             });
           column.data().unique().sort().each(function(d, j) {
-            val_select.append( '<option value="'+d+'">'+d+'</option>' );
+            val_select.append('<option value="'+d+'">'+d+'</option>');
           });
-        } else {
 
 
-          var title = $(column.header()).text();
+        } else if(title === 'Constraints') { // HARD CODED HERE
+
+          
+          val_select.appendTo($(column.footer()).empty())
+            .on('change', function() {
+              var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                column.search(val ? '('+val+')' : '', true, false).draw(); // different
+            });
+
+
+          $.each(constraints, function(j, d) { // already unique sorted array
+            val_select.append('<option value="'+d+'">'+d+'</option>');
+          });          
+
+
+        } else { // text search
+
+
           var text_select = $('<input type="text" placeholder="'+title+'"/>')
             .appendTo($(column.footer()).empty())
             .on('keyup change', function() {

@@ -10,6 +10,7 @@ gem 'pony', '1.12'
 gem 'puma', '3.12.0'
 gem 'rake', '12.3.1'
 gem 'sequel', '5.10.0'
+
 gem 'sequel_pg', '1.11.0', require: 'sequel' # faster C adapter
 gem 'sinatra', '2.0.3', require: 'sinatra/base'
 

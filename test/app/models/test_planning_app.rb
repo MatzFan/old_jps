@@ -21,6 +21,18 @@ class PlanningAppTest < JpsTest
     end
   end
 
+  def test_app_address
+    assert_equal 'Acacia Avenue<br>Trinity<br>JE1 1AB', @app.app_address
+  end
+
+  def test_constraints_list
+    assert_equal %w[Airport Green\ Zone], @app.constraints_list
+  end
+
+  def test_app_constraints
+    assert_equal 'Airport<br>Green Zone', @app.app_constraints
+  end
+
   def test_constraints
     assert_equal %w[Airport Green\ Zone], @app.constraints.map(&:name).sort
   end

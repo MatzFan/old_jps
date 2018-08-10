@@ -17,8 +17,10 @@ class PlanningApp < Sequel::Model
     self.app_code = code_year_number[0]
     self.app_year = code_year_number[1].to_i
     self.app_number = code_year_number[2].to_i
-    self.order = app_year * 10_000 + app_number
+    self.order = build_order
     self.app_address = build_address
+    self.constraints_list = split_constraints # array type
+    self.app_constraints = breakify_constraints
     super
   end
 
@@ -41,6 +43,8 @@ class PlanningApp < Sequel::Model
                   app_description app_applicant app_agent app_officer
                   app_parish app_constraints].freeze
 
+  TABLE_LOVS = %w[Category Code Status Parish].freeze
+
   TABLE_TITLES = %w[Order Date Reference Code Status Address Description
                     Applicant Agent Officer Parish Constraints].freeze
 
@@ -51,8 +55,13 @@ class PlanningApp < Sequel::Model
 
   private
 
+  def build_order
+    app_year * 10_000 + app_number
+  end
+
   def build_address
-    self.app_address = [app_house, app_road, app_parish, app_postcode].compact.join("\n")
+    fields = [app_house, app_road, app_parish, app_postcode]
+    self.app_address = fields.compact.join('<br>')
   end
 
   def create_parent(klass, opts)
@@ -60,8 +69,12 @@ class PlanningApp < Sequel::Model
     klass.find_or_create(opts) if opts.values.first
   end
 
-  def constraints_list
-    app_constraints.split(', ').sort
+  def split_constraints
+    Sequel.pg_array app_constraints.split(', ').sort
+  end
+
+  def breakify_constraints
+    constraints_list.join '<br>'
   end
 
   def add_constraints

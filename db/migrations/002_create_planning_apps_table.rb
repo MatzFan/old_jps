@@ -15,6 +15,7 @@ Sequel.migration do
       String :app_applicant
       String :app_address
       String :app_constraints
+      column :constraints_list, 'text[]'
       String :app_description
       String :app_house
       String :app_postcode
