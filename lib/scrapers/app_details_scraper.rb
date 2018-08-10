@@ -32,8 +32,8 @@ class AppDetailsScraper
   attr_reader :agent, :app_refs, :num_refs, :det_pages, :dat_pages
 
   def initialize(*app_refs)
-    @agent = Mechanize.new
     @app_refs = app_refs.flatten
+    @agent = Mechanize.new
     @num_refs = @app_refs.length
     @det_pages = pages('DETAILS_PAGE').map(&validate)
     @dat_pages = pages('DATES_PAGE').map(&validate)
@@ -41,7 +41,9 @@ class AppDetailsScraper
   end
 
   def data
-    (0...num_refs).map { |i| det_pages[i] && dat_pages[i] ? data_hash(i) : {} }
+    Parallel.map((0...num_refs), in_threads: 8) do |i|
+      det_pages[i] && dat_pages[i] ? data_hash(i) : {}
+    end
   end
 
   private

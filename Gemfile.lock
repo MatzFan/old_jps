@@ -150,6 +150,7 @@ DEPENDENCIES
   libnotify (= 0.9.4)
   mechanize (= 2.7.6)
   minitest (= 5.11.3)
+  parallel (= 1.12.1)
   poltergeist (= 1.18.1)
   pony (= 1.12)
   puma (= 3.12.0)

@@ -19,7 +19,7 @@ class PlanningApp < Sequel::Model
     self.app_number = code_year_number[2].to_i
     self.order = build_order
     self.app_address = build_address
-    self.constraints_list = split_constraints # array type
+    @constraints_list = constraints_list
     self.app_constraints = breakify_constraints
     super
   end
@@ -48,10 +48,9 @@ class PlanningApp < Sequel::Model
   TABLE_TITLES = %w[Order Date Reference Code Status Address Description
                     Applicant Agent Officer Parish Constraints].freeze
 
-  # # def self.latest_app_num_for(year)
-  # #   apps = where(app_year: year).order(:order).last
-  # #   apps.respond_to?(:[]) ? apps[:app_number] : nil
-  # # end
+  def self.latest_app_num_for(year)
+    where(app_year: year).order(:order).last&.app_number
+  end
 
   private
 
@@ -65,21 +64,20 @@ class PlanningApp < Sequel::Model
   end
 
   def create_parent(klass, opts)
-    # klass.find_or_create(opts) if send("app_#{klass.to_s.downcase}".to_sym)
     klass.find_or_create(opts) if opts.values.first
   end
 
-  def split_constraints
-    Sequel.pg_array app_constraints.split(', ').sort
+  def constraints_list
+    return [] unless app_constraints
+    app_constraints.split(', ').sort
   end
 
   def breakify_constraints
-    constraints_list.join '<br>'
+    (list = @constraints_list).empty? ? nil : list.join('<br>')
   end
 
   def add_constraints
-    return unless app_constraints
-    constraints_list.each do |c|
+    @constraints_list.each do |c|
       Constraint.find_or_create(name: c) # before populating join table
       attributes = { name: c, app_ref: app_ref }
       num_records = DB[:constraints_planning_apps].where(attributes).count

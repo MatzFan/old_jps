@@ -3,7 +3,8 @@
 # scrapes app refs for a given year
 class AppRefsScraper
   ROOT = 'https://www.gov.je/'
-  CURL = 'curl -s -X POST -H "Content-Type: application/json" -d'
+  CURL = 'curl -s -X POST -H "Content-Type: application/json"\
+          -H "Accept-Encoding: gzip" -d'
   URL = '"URL":'
   SITE = '"https://www.gov.je/citizen/Planning/Pages/Planning.aspx"'
   COMMON = '"CommonParameters":'
@@ -23,11 +24,14 @@ class AppRefsScraper
     @num_apps = number_of_apps
     @num_pages = number_of_pages
     @start_page = start_page
+    @latest_app_num = latest_app_num
   end
 
   def refs
     (@start_page..num_pages).inject([]) do |memo, page_num|
-      memo + app_refs_on_page(page_num)
+      refs = app_refs_on_page(page_num)
+      return memo + refs if include_latest_app_ref?(refs)
+      memo + refs
     end
   end
 
@@ -43,6 +47,10 @@ class AppRefsScraper
 
   def number_of_pages
     (num_apps / 10.0).ceil
+  end
+
+  def latest_app_num
+    PlanningApp.latest_app_num_for(@year).to_s.rjust(4, '0') || '0000'
   end
 
   def app_refs_array(page)
@@ -71,6 +79,10 @@ class AppRefsScraper
 
   def json_for_page(page)
     cmd = CURL + " {'" + params(page) + "}' " + ROOT + REQ_PAGE
-    `#{cmd}`
+    `#{cmd}| gunzip -`
+  end
+
+  def include_latest_app_ref?(refs)
+    refs.any? { |r| r =~ %r{\/#{@year}\/#{@latest_app_num}$} }
   end
 end

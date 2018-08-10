@@ -12,4 +12,3 @@ DB_BASE = "postgres://:#{PORT}/jps_" # leave host blank for Travis
 DB = Sequel.connect(ENV['DATABASE_URL'] || DB_BASE + RACK_ENV)
 
 Sequel.extension :migration
-DB.extension :pg_array

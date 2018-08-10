@@ -19,6 +19,13 @@ class AppRefsScraperTest < Minitest::Test
     assert_instance_of AppRefsScraper, self.class.scraper
   end
 
+  def test_refs_with_latest_app_num
+    self.class.scraper.instance_variable_set(:@latest_app_num, '0011')
+    assert_equal 10, self.class.scraper.refs.count
+  ensure
+    self.class.scraper.instance_variable_set(:@latest_app_num, '0000')
+  end
+
   def test_num_apps
     assert_equal 1466, self.class.scraper.num_apps
   end
@@ -29,5 +36,9 @@ class AppRefsScraperTest < Minitest::Test
 
   def test_refs_from_page_146
     assert_equal self.class.refs_from_page_146, self.class.scraper.refs
+  end
+
+  def test_latest_app_num_with_no_apps_in_db
+    assert_equal '0000', self.class.scraper.send(:latest_app_num)
   end
 end

@@ -28,7 +28,7 @@ function drawAppsTable(data, callback) {
       this.api().columns().every(function() {
         var column = this;
         var title = $(column.header()).text();
-        var val_select = $('<select><option value=""></option></select>')
+        var val_select = $('<select><option value=""></option></select>');
 
 
         if(lovTitles.includes(title)) {
