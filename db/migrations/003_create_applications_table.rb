@@ -2,7 +2,7 @@
 
 Sequel.migration do
   change do
-    create_table :planning_apps do
+    create_table :applications do
       String :app_ref, primary_key: true
       String :app_code
       Integer :app_year
@@ -11,7 +11,7 @@ Sequel.migration do
       foreign_key :app_category, :categories, type: String
       foreign_key :app_officer, :officers, type: String
       foreign_key :app_status, :statuses, type: String
-      foreign_key :app_parish, :parish_aliases, type: String
+      foreign_key :app_parish, :parish_strings, type: String
       String :app_applicant
       String :app_address
       String :app_constraints

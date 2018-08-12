@@ -2,4 +2,5 @@
 
 require_relative 'app'
 
+use Rack::Deflater
 run Jps::App

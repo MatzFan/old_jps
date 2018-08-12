@@ -50,7 +50,7 @@ class AppRefsScraper
   end
 
   def latest_app_num
-    PlanningApp.latest_app_num_for(@year).to_s.rjust(4, '0') || '0000'
+    Application.latest_app_num_for(@year).to_s.rjust(4, '0') || '0000'
   end
 
   def app_refs_array(page)

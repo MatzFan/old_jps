@@ -3,6 +3,7 @@ function drawAppsTable(data, callback) {
   var appData = data.app_data;
   var lovTitles = data.lov_titles;
   var constraints = data.constraints; // array
+  var parishes = data.parishes; // array
   var thDivs = $(columns).map(function() {
     return "<th>"+this.title+"</th>";
   }).get().join('');
@@ -49,13 +50,24 @@ function drawAppsTable(data, callback) {
           val_select.appendTo($(column.footer()).empty())
             .on('change', function() {
               var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                column.search(val ? '('+val+')' : '', true, false).draw(); // different
-            });
-
-
+                column.search(val ? '('+val+')' : '', true, false).draw(); // same
+            });  
           $.each(constraints, function(j, d) { // already unique sorted array
             val_select.append('<option value="'+d+'">'+d+'</option>');
-          });          
+          });
+          
+
+        } else if(title === 'Parish') { // HARD CODED HERE
+          
+
+          val_select.appendTo($(column.footer()).empty())
+            .on('change', function() {
+              var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                column.search(val ? '('+val+')' : '', true, false).draw(); // same
+            });  
+          $.each(parishes, function(j, d) { // already unique sorted array
+            val_select.append('<option value="'+d+'">'+d+'</option>');
+          });
 
 
         } else { // text search

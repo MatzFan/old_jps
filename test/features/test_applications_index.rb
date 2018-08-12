@@ -2,7 +2,7 @@
 
 require_relative 'feature_test_helper'
 
-class PlanningAppIndexTest < CapybaraTestCase
+class ApplicationsIndexTest < CapybaraTestCase
   def setup
     super
     Capybara.current_driver = Capybara.javascript_driver

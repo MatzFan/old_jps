@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 # represents planning applications
-class PlanningApp < Sequel::Model
+class Application < Sequel::Model
   unrestrict_primary_key
   many_to_one :category, key: :app_category
   many_to_one :officer, key: :app_officer
   many_to_one :status, key: :app_status
   many_to_one :agent_alias, key: :app_agent
-  many_to_one :parish_alias, key: :app_parish
+  many_to_one :parish_string, key: :app_parish
 
-  one_to_many :planning_app_constraints, key: :app_ref
+  one_to_many :application_constraints, key: :app_ref
   many_to_many :constraints, left_key: :app_ref, right_key: :name
 
   def before_validation
@@ -29,7 +29,7 @@ class PlanningApp < Sequel::Model
       create_parent(Category, code: app_category)
       create_parent(Officer, name: app_officer)
       create_parent(Status, name: app_status)
-      create_parent(ParishAlias, name: app_parish)
+      create_parent(ParishString, string: app_parish)
       create_parent(AgentAlias, name: app_agent)
     end
     super
@@ -43,13 +43,17 @@ class PlanningApp < Sequel::Model
                   app_description app_applicant app_agent app_officer
                   app_parish app_constraints].freeze
 
-  TABLE_LOVS = %w[Category Code Status Parish].freeze
+  TABLE_LOVS = %w[Category Code Status].freeze # constraints & parish special
 
   TABLE_TITLES = %w[Order Date Reference Code Status Address Description
                     Applicant Agent Officer Parish Constraints].freeze
 
   def self.latest_app_num_for(year)
     where(app_year: year).order(:order).last&.app_number
+  end
+
+  def parishes
+    parish_string.parishes.map(&:name) # CAN BE MORE THAN ONE!
   end
 
   private
@@ -80,8 +84,8 @@ class PlanningApp < Sequel::Model
     @constraints_list.each do |c|
       Constraint.find_or_create(name: c) # before populating join table
       attributes = { name: c, app_ref: app_ref }
-      num_records = DB[:constraints_planning_apps].where(attributes).count
-      DB[:constraints_planning_apps].insert(attributes) if num_records.zero?
+      num_records = DB[:applications_constraints].where(attributes).count
+      DB[:applications_constraints].insert(attributes) if num_records.zero?
     end
   end
 end

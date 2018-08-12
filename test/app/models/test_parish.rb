@@ -6,15 +6,10 @@ require_relative '../../../app/models/parish'
 class ParishTest < JpsTest
   def setup
     super
-    Parish.create(number: 13, name: 'St. Elsewhere')
-  end
-
-  def teardown
-    super
-    Parish[13]&.delete
+    Parish.create(name: 'St. Elsewhere')
   end
 
   def test_save
-    assert_equal 13, Parish.count
+    assert_equal 1, Parish.count
   end
 end

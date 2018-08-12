@@ -11,10 +11,13 @@ module Jps
       end
 
       get '/applications/data.json' do
-        apps = PlanningApp.order(:order).reverse.select_map(PlanningApp::TABLE_COLS)
-        { columns: PlanningApp::TABLE_TITLES.map do |t|
-          { title: t }
-        end, app_data: apps, lov_titles: PlanningApp::TABLE_LOVS, constraints: Constraint.select_order_map(:name) }.to_json
+        apps = Application.order(:order).reverse.select_map(Application::TABLE_COLS)
+        columns = Application::TABLE_TITLES.map { |t| { title: t } }
+        { columns: columns,
+          app_data: apps,
+          lov_titles: Application::TABLE_LOVS,
+          constraints: Constraint.select_order_map(:name),
+          parishes: Parish.select_order_map(:name) }.to_json
       end
 
       get '/applications/map' do

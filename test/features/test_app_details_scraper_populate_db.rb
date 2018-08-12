@@ -7,10 +7,10 @@ require_relative '../../lib/scrapers/app_details_scraper'
 class IntegrationTest < JpsTest
   def setup
     super
-    PlanningApp.create AppDetailsScraper.new('RW/2014/0548').data.first
+    Application.create AppDetailsScraper.new('RW/2014/0548').data.first
   end
 
   def test_populate_db
-    assert_instance_of PlanningApp, PlanningApp.first
+    assert_instance_of Application, Application.first
   end
 end
