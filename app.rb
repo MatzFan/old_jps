@@ -22,6 +22,7 @@ module Jps
     set :sessions, httponly: true,
                    secure:   false,
                    secret:   ENV['JPS_SESSION_SECRET']
+    use Jps::Routes::Admin
     use Jps::Routes::Base
     use Jps::Routes::Home
     use Jps::Routes::Contact

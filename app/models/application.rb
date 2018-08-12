@@ -82,7 +82,7 @@ class Application < Sequel::Model
 
   def add_constraints
     @constraints_list.each do |c|
-      Constraint.find_or_create(name: c) # before populating join table
+      Constraint.find_or_create(con_name: c) # before populating join table
       attributes = { name: c, app_ref: app_ref }
       num_records = DB[:applications_constraints].where(attributes).count
       DB[:applications_constraints].insert(attributes) if num_records.zero?

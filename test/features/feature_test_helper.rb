@@ -23,19 +23,15 @@ class CapybaraTestCase < JpsTest
     Capybara.use_default_driver
   end
 
-  def create_test_user
-    User.create name: 'joe', email: 'joe@m.com', password: 'pass'
-  end
-
-  def login_test_user
+  def login_user(user)
     visit '/login'
-    fill_in 'email', with: 'joe@m.com'
-    fill_in 'password', with: 'pass'
+    fill_in 'email', with: user.email
+    fill_in 'password', with: 'pass' # HARD CODED
     click_button 'Sign in'
   end
 
-  def logout_test_user
-    visit '/'
-    click_button 'Logout'
-  end
+  # def logout_user
+  #   visit '/'
+  #   click_button 'Logout'
+  # end
 end

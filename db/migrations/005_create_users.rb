@@ -12,6 +12,7 @@ Sequel.migration do
       String :authenticity_token
       String :password_reset_token
       DateTime :password_reset_sent_date
+      FalseClass :admin, null: false, default: false
     end
   end
 end

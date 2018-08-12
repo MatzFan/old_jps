@@ -5,7 +5,7 @@ require_relative 'feature_test_helper'
 class HomePageTest < CapybaraTestCase
   def setup
     super
-    create_test_user
+    @user = create_test_user
   end
 
   def test_navbar_links
@@ -18,7 +18,7 @@ class HomePageTest < CapybaraTestCase
   end
 
   def test_logged_in_user_navbar_links
-    login_test_user
+    login_user @user
     visit '/'
     assert_link 'Edit profile'
     assert_link 'Logout'

@@ -10,7 +10,7 @@ class UserLoginTest < CapybaraTestCase
   end
 
   def test_user_login_redirects_to_applications_index
-    login_test_user
+    login_user User.first
     assert_current_path '/applications/index'
   end
 end

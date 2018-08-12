@@ -6,7 +6,7 @@ class ApplicationsIndexTest < CapybaraTestCase
   def setup
     super
     Capybara.current_driver = Capybara.javascript_driver
-    create_test_user
+    @user = create_test_user
     create_test_planning_app
   end
 
@@ -16,7 +16,7 @@ class ApplicationsIndexTest < CapybaraTestCase
   end
 
   def test_applications_index_for_logged_in_user
-    login_test_user
+    login_user @user
     visit '/applications/index'
     assert page.has_content? 'Reference' # in table title
     assert page.has_content? 'P/2018/9999' # in table body

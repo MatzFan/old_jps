@@ -43,7 +43,7 @@ class ApplicationTest < JpsTest
   end
 
   def test_constraints
-    assert_equal %w[Airport Green\ Zone], @app.constraints.map(&:name).sort
+    assert_equal %w[Airport Green\ Zone], @app.constraints.map(&:con_name).sort
   end
 
   def test_latest_app_num_for_2018

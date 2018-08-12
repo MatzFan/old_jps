@@ -4,7 +4,9 @@ module Jps
   module Routes
     # the Contact page
     class Applications < Base
-      before { redirect('/login') unless signed_in? }
+      before do
+        redirect('/login') unless signed_in?
+      end
 
       get '/applications/index' do
         haml :index
@@ -16,7 +18,7 @@ module Jps
         { columns: columns,
           app_data: apps,
           lov_titles: Application::TABLE_LOVS,
-          constraints: Constraint.select_order_map(:name),
+          constraints: Constraint.select_order_map(:con_name),
           parishes: Parish.select_order_map(:name) }.to_json
       end
 

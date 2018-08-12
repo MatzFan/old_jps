@@ -6,7 +6,7 @@ require_relative '../../../app/models/constraint'
 class ConstraintTest < JpsTest
   def setup
     super
-    Constraint.create(name: 'New Constraint')
+    Constraint.create(con_name: 'New Constraint')
   end
 
   def test_save

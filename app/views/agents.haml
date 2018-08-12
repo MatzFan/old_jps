@@ -1,0 +1,11 @@
+.container-fluid
+  %table.table-bordered
+    %thead
+      %tr
+      - @titles.each do |title|
+        %td= title
+    %tbody
+    - @data.each do |row|
+      %tr
+      - row.each do |col|
+        %td= col

@@ -2,8 +2,21 @@
 
 Sequel.migration do
   change do
-    create_table :constraints do
+    create_table :policy_sources do
       String :name, primary_key: true, on_update: :cascade
+    end
+
+    create_table :policies do
+      primary_key :id
+      foreign_key :source, :policy_sources, type: String
+      String :policy_code
+      String :policy_name
+      String :link
+    end
+
+    create_table :constraints do
+      foreign_key :policy_id, :policies
+      String :con_name, primary_key: true, on_update: :cascade
     end
 
     create_table :applications_constraints do # alphabetical & plural
