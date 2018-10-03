@@ -9,4 +9,6 @@ class Policy < Sequel::Model
     PolicySource.find_or_create(name: source)
     super
   end
+
+  # JSON.parse(File.read('policies.json')).each {|h| Policy.create h}
 end

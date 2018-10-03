@@ -14,10 +14,6 @@ class ParishStringTest < JpsTest
     assert_equal 2, ParishString.count
   end
 
-  def test_raise_if_bad_parish_name
-    assert_raises(RuntimeError) { ParishString.create(string: 'St. Mray') }
-  end
-
   def test_multiple_parishes
     assert_equal %w[St.\ Lawrence St.\ Mary], @string.parishes.map(&:name)
   end

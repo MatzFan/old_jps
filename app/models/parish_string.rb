@@ -11,20 +11,20 @@ class ParishString < Sequel::Model
     super
   end
 
+  WORDS = %w[Grouville Brelade Clement Helier John Lawrence
+             Martin Mary Ouen Peter Saviour Trinity].freeze
+
   private
 
   def populate_join_table
     parish_names.each do |name|
-      raise "Bad parish: #{name}" unless Parish::NAMES.include? name
       ParishStringsParish.find_or_create par_name: name, par_string: string
     end
   end
 
   def parish_names
-    string.split('/').map(&:strip).map { |p| check_dot(p) }
-  end
-
-  def check_dot(string)
-    string.scan(/St /).empty? ? string : string.sub('St', 'St.')
+    Parish::NAMES.each_with_index.map do |parish, i|
+      string.include?(WORDS[i]) ? parish : nil
+    end.compact
   end
 end

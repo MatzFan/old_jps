@@ -27,7 +27,7 @@ class ApplicationTest < JpsTest
   end
 
   def test_parishes
-    assert_equal %w[Trinity St.\ John], @app.parishes
+    assert_equal %w[St.\ John Trinity], @app.parishes.sort
   end
 
   def test_agent_alias

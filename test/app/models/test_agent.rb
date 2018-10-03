@@ -24,4 +24,9 @@ class AgentTest < JpsTest
   def test_agent_type
     assert_equal 'Entity', @agent.agent_type.type
   end
+
+  def test_add_agent_alias
+    @agent.add_agent_alias(name: 'A N Agent')
+    assert_equal 'A N Agent', @agent.agent_aliases.first.name
+  end
 end

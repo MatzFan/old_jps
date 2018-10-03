@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# require 'rake/testtask'
+require 'rake/testtask'
 require_relative 'config/database'
 
 migrate = './tasks/db/migrate.rake'
@@ -13,11 +13,11 @@ if Sequel::Migrator.is_current?(DB, 'db/migrations')
   other_tasks.each { |r| load r }
 end
 
-# Rake::TestTask.new do |t|
-#   # t.libs << 'test' # t.libs = ['lib']
-#   t.test_files = FileList['test/**/test_*.rb']
-#   t.verbose = true
-# end
-# desc 'Run tests'
+Rake::TestTask.new do |t|
+  # t.libs << 'test' # t.libs = ['lib']
+  t.test_files = FileList['test/**/test_*.rb']
+  # t.verbose = true
+end
+desc 'Run tests'
 
-# task default: :test
+task default: :test

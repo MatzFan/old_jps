@@ -9,7 +9,7 @@ class JfscRegistryScraper
   REG_FIELD = 'ctl00$Main$txtRegNo'
   RES_TABLE = 'table#Main_ResultsGrid'
   TABLE_HEADERS = %w[Number Type Name Date\ Registered].freeze
-  KEYS = %i[Number Type Name Registered].freeze
+  KEYS = %i[number type name registered].freeze
 
   attr_reader :agent
 
@@ -33,6 +33,7 @@ class JfscRegistryScraper
   end
 
   def results_rows
+    return [] unless @results_table
     raise unless verify_table_headers
     @results_table.css('tbody tr')
   end
@@ -42,7 +43,7 @@ class JfscRegistryScraper
   end
 
   def results_table
-    search.at_css RES_TABLE
+    search.at_css RES_TABLE # may be nil
   end
 
   def search

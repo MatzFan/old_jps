@@ -5,14 +5,14 @@ require_relative '../../../lib/scrapers/jfsc_registry_scraper'
 
 class JfscRegistryScraperTest < Minitest::Test
   def setup
-    @row1 = { Number: '91091',
-              Type: 'RC',
-              Name: 'TRINITY JOINERY (2005) LIMITED',
-              Registered: '02 Sep 2005' }
-    @row2 = { Number: '22331',
-              Type: 'RBN',
-              Name: 'TRINITY JOINERY',
-              Registered: '20 Sep 2005' }
+    @row1 = { number: '91091',
+              type: 'RC',
+              name: 'TRINITY JOINERY (2005) LIMITED',
+              registered: '02 Sep 2005' }
+    @row2 = { number: '22331',
+              type: 'RBN',
+              name: 'TRINITY JOINERY',
+              registered: '20 Sep 2005' }
     @results = [@row1, @row2]
   end
 
@@ -34,6 +34,10 @@ class JfscRegistryScraperTest < Minitest::Test
 
   def test_results_text
     assert_equal @results, self.class.text_scraper.results
+  end
+
+  def test_results_text_for_no_results
+    assert_equal [], JfscRegistryScraper.new(text: 'zydxq').results
   end
 
   def test_results_reg

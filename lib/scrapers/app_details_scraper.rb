@@ -4,11 +4,14 @@ require 'mechanize'
 
 # Scrapes application details
 class AppDetailsScraper
+  UA = 'Mozilla/5.0 (Windows NT 6.1; rv:52.0) Gecko/20100101 Firefox/52.0'
+  HEADERS = { 'User-Agent' => UA }.freeze
   MIS = 'Application number is missing from the request or was not found'
-  ROOT = 'https://www.gov.je/citizen/Planning/Pages/'
+  ROOT = 'https://www.gov.je//citizen/planning/pages/'
   DETAILS_PAGE = 'PlanningApplicationDetail.aspx?s=1&r='
   DATES_PAGE = 'PlanningApplicationTimeline.aspx?s=1&r='
-  CSS = ".//table[@class='pln-searchd-table']"
+  FEDAUTH = 'FedAuth'
+  TABLE_CSS = ".//table[@class='pln-searchd-table']"
   TT = '_table_titles'
   ID_DELIM = 'ctl00_lbl'
   COORDS = %i[Latitude Longitude].freeze
@@ -33,8 +36,9 @@ class AppDetailsScraper
 
   def initialize(*app_refs)
     @app_refs = app_refs.flatten
-    @agent = Mechanize.new
+    @agent = Mechanize.new.tap { |agent| agent.request_headers = HEADERS } # tap
     @num_refs = @app_refs.length
+    set_fed_auth_cookie # needed before scraping begins
     @det_pages = pages('DETAILS_PAGE').map(&validate)
     @dat_pages = pages('DATES_PAGE').map(&validate)
     raise unless correct_number_of_pages?
@@ -47,6 +51,11 @@ class AppDetailsScraper
   end
 
   private
+
+  def set_fed_auth_cookie
+    agent.get(ROOT + DETAILS_PAGE + app_refs.first)
+    agent.cookie_jar << agent.cookies.select { |c| c.name == FEDAUTH }.first
+  end
 
   def validate
     proc { |page| page unless page.body.include? MIS } # invalid pages => nil's
@@ -105,11 +114,13 @@ class AppDetailsScraper
   end
 
   def det_table(int, num)
-    det_pages[int].search(CSS)[num].css('tr').css('td').css('span')
+    tables = det_pages[int].search(TABLE_CSS)
+    raise "Not 2 tables for #{app_refs[int]}" unless tables.size == 2
+    tables[num].css('tr').css('td').css('span')
   end
 
   def dates_table(int)
-    dat_pages[int].search(CSS).css('tr').css('td').css('span')
+    dat_pages[int].search(TABLE_CSS).css('tr').css('td').css('span')
   end
 
   def details_table_titles(int)

@@ -5,7 +5,17 @@
       - @titles.each do |title|
         %td= title
     %tbody
-    - @data.each do |row|
+    - @data.each_with_index do |row, i|
       %tr
       - row.each do |col|
         %td= col
+         
+
+:javascript
+  $(function() {
+    $(".submit-btn").click(function(e){
+      e.preventDefault();
+      console.log($("#id").val());
+    });
+  });
+        
