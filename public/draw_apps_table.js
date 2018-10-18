@@ -34,7 +34,7 @@ function drawAppsTable(data, callback) {
         var val_select = $('<select><option value=""></option></select>');
 
 
-        if(lovTitles.indexOf(title) >= 0) {
+        if(lovTitles.indexOf(title) >= 0) { // better support than Array.includes()
 
             val_select.appendTo($(column.footer()).empty())
             .on('change', function() {
