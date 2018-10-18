@@ -29,6 +29,11 @@ function drawAppsTable(data, callback) {
       this.api().columns().every(function() {
         var column = this;
         var title = $(column.header()).text();
+
+
+        console.log(title);
+
+        
         var val_select = $('<select><option value=""></option></select>');
 
 

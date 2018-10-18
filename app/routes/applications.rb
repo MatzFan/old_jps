@@ -15,6 +15,7 @@ module Jps
       get '/applications/data.json' do
         apps = Application.order(:order).reverse.select_map(Application::TABLE_COLS)
         columns = Application::TABLE_TITLES.map { |t| { title: t } }
+        puts columns.inspect
         { columns: columns,
           app_data: apps,
           lov_titles: Application::TABLE_LOVS,
