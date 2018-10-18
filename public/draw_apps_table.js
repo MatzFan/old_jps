@@ -31,13 +31,10 @@ function drawAppsTable(data, callback) {
         var title = $(column.header()).text();
 
 
-        console.log(title);
-
-        
         var val_select = $('<select><option value=""></option></select>');
 
 
-        if(lovTitles.includes(title)) {
+        if(lovTitles.indexOf(title) >= 0) {
 
             val_select.appendTo($(column.footer()).empty())
             .on('change', function() {
