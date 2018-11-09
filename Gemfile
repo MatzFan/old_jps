@@ -11,7 +11,7 @@ gem 'parallel', '1.12.1'
 gem 'pony', '1.12'
 gem 'puma', '3.12.0'
 gem 'rake', '12.3.1'
-gem 'sequel', '5.13.0'
+gem 'sequel', '5.14.0'
 gem 'sequel_pg', '1.11.0', require: 'sequel' # faster C adapter
 gem 'sinatra', '2.0.3', require: 'sinatra/base'
 
